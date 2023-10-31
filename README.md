@@ -16,13 +16,13 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
 0) Add the extension to your Directus extensions directory.
 1) Restart Directus.
 2) Create a new collection to store your saved videos. To match the api response the collection should have the following fields:
-    2.1) name: string
-    2.2) date_created: datetime | timestamp
-    2.3) slug: string string | slugify
-    2.4) network: string
-    2.5) country: string
-    2.6) runtime: integer
-    2.7) genre: csv | tags
+    - name: string
+    - date_created: datetime | timestamp
+    - slug: string string | slugify
+    - network: string
+    - country: string
+    - runtime: integer
+    - genre: csv | tags
 3) Add a new panel and select the API Lookup panel from the list of available panels.
 4) Select a collection you would like to save to.
 5) Select the name column from the Response configuration field.
