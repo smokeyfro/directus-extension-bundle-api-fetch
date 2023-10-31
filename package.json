@@ -1,0 +1,43 @@
+{
+	"name": "directus-extension-bundle-api-fetch",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "Search one of the connected api's and import as Directus items",
+	"icon": "extension",
+	"directus:extension": {
+		"host": "^10.1.13",
+		"type": "bundle",
+		"path": {
+			"app": "dist/app.js",
+			"api": "dist/api.js"
+		},
+		"entries": [
+			{
+				"type": "endpoint",
+				"name": "api-fetch-endpoint",
+				"source": "src/api-fetch-endpoint/index.js"
+			},
+			{
+				"type": "panel",
+				"name": "api-fetch-panel",
+				"source": "src/api-fetch-panel/index.js"
+			}
+		]
+	},
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-bundle",
+		"Remote API"
+	],
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"link": "directus-extension link",
+		"add": "directus-extension add"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "10.1.13",
+		"vue": "^3.3.7"
+	}
+}
