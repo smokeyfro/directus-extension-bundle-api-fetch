@@ -6,7 +6,9 @@
       @keyup.enter="search" 
       placeholder="Type a show name then hit enter...">
     </v-input>
-    <ul v-if="filteredResults.length">
+    <div v-if="isLoading">Loading</div>
+
+    <ul v-else-if="filteredResults.length">
       <li 
         v-for="result in filteredResults" 
         :key="result.name" 
@@ -57,52 +59,54 @@
 </template>
 
 <script>
-import { useApi, useCollection } from '@directus/extensions-sdk';
-import { computed, ref } from 'vue'
+import { useApi, useCollection, useStores } from '@directus/extensions-sdk';
+import { computed, ref, watch } from 'vue';
 
 export default {
   props: {
-    props: {
-      showHeader: {
-        type: Boolean,
-        default: false,
-      },
-      collection: {
-        type: String,
-        default: '',
-      },
-      fields: {
-        type: Array,
-        default: () => [],
-      },
-      responseFormat: {
-        type: String,
-        default: '',
-      },
-      width: String,
-      height: String,
+    showHeader: {
+      type: Boolean,
+      default: false,
     },
+    collection: {
+      type: String,
+      default: '',
+    },
+    fields: {
+      type: Array,
+      default: () => [],
+    },
+    responseFormat: {
+      type: String,
+      default: '',
+    },
+    width: String,
+    height: String,
   },
   setup(props) {
-		//const { usePermissionsStore } = useStores();
-		//const permissionsStore = usePermissionsStore();
-		//const hasPermission = permissionsStore(props.collection, 'create');
+		const { usePermissionsStore } = useStores();
+		const permissionsStore = usePermissionsStore();
+    const hasPermission = computed(() => permissionsStore.has(props.collection, 'create'));
     const api = useApi();
-    const { primaryKeyField } = useCollection('shows');
+    const isLoading = ref(false);
+    const { primaryKeyField } = useCollection(props.collection);
     const query = ref('');
-    const results = ref([]);
+    const searchResults = ref([]);
     let selectedItem = ref(null);
     const formResponse = ref({});
     const formError = ref({});
     const responseDialog = ref(false);
+
     async function search() {
+      isLoading.value = true;
       const response = await api.get(`/api-fetch?q=${query.value}`);
-      results.value = response.data;
+      searchResults.value = response.data;
+      isLoading.value = false;
    }
 
     const filteredResults = computed(() => {
       if (query.value) {
-        return results.value.filter((item) => {
+        return searchResults.value.filter((item) => {
           return item.name && item.language.includes('English');
         });
       }
@@ -117,23 +121,33 @@ export default {
 
     function saveItem() {
       api
-        .post('/items/shows', selectedItem.value)
+        .post(`/items/${props.collection}`, selectedItem.value)
         .then((response) => {
           formResponse.value = response.data.data;
           responseDialog.value = true;
           selectedItem.value = null;
         })
         .catch((error) => {
-          formError.value = error;
+          if (error.response && error.response.status === 400) {
+            formError.value = "Bad request. Please check your data.";
+          } else if (error.response && error.response.status === 500) {
+            formError.value = "Internal server error. Please try again later.";
+          } else {
+            console.error("Error while saving the item:", error);
+            formError.value = "An error occurred while saving the item. Please try again later.";
+          }
           responseDialog.value = true;
         });
     }
 
+    watch([() => props.collection], search);
+
     return { 
-      //hasPermission,
+      hasPermission,
+      isLoading,
       primaryKeyField,
       query, 
-      results, 
+      searchResults, 
       filteredResults, 
       selectedItem, 
       formResponse,
@@ -148,7 +162,7 @@ export default {
 			if (item === undefined) return;
       //console.log(item);
 			const primaryKey = item[primaryKeyField.value.field];
-			return `/content/shows/${encodeURIComponent(primaryKey)}`;
+			return `/content/${props.collection}/${encodeURIComponent(primaryKey)}`;
 		}
   }
 };
