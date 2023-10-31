@@ -18,7 +18,7 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
 2) Create a new collection to store your saved videos. To match the api response the collection should have the following fields:
     - name: string
     - date_created: datetime | timestamp
-    - slug: string string | slugify
+    - slug: string | slugify
     - network: string
     - country: string
     - runtime: integer
