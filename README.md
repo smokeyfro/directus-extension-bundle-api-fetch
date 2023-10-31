@@ -35,18 +35,13 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
 ![Select the result and save to Directus](./screenshot-3.png)
 
 ## Video preview
+[See it in action](https://www.youtube.com/watch?v=PE3BtRiyFQg](https://share.vidyard.com/watch/kApfjos8yrLQPzzofU4j16?)
 
-<video width="630" height="300" src="https://user-images.githubusercontent.com/126239/151127893-5c98ba8d-c431-4a25-bb1f-e0b33645a2b6](https://github.com/smokeyfro/directus-extension-bundle-api-fetch/assets/109826/93084305-16f2-4e6e-b175-1e3a0c4e9de7.mp4"></video>
-
-<!-- The script tag should live in the head of your page if at all possible -->
-<script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
-
-<!-- Put this wherever you would like your player to appear -->
-<img
+[<img
   style="width: 100%; margin: auto; display: block;"
   class="vidyard-player-embed"
   src="https://play.vidyard.com/kApfjos8yrLQPzzofU4j16.jpg"
   data-uuid="kApfjos8yrLQPzzofU4j16"
   data-v="4"
   data-type="inline"
-/>
+/>](https://share.vidyard.com/watch/kApfjos8yrLQPzzofU4j16?)
