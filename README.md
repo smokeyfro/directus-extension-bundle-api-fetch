@@ -35,7 +35,6 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
 ![Select the result and save to Directus](./screenshot-3.png)
 
 ## Video preview
-[See it in action](https://www.youtube.com/watch?v=PE3BtRiyFQg](https://share.vidyard.com/watch/kApfjos8yrLQPzzofU4j16?)
 
 [<img
   style="width: 100%; margin: auto; display: block;"
@@ -44,4 +43,4 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
   data-uuid="kApfjos8yrLQPzzofU4j16"
   data-v="4"
   data-type="inline"
-/>](https://share.vidyard.com/watch/kApfjos8yrLQPzzofU4j16?)
+/>](https://share.vidyard.com/watch/kApfjos8yrLQPzzofU4j16?){:target="_blank"}
