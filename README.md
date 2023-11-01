@@ -31,6 +31,8 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
     - country: string
     - runtime: integer
     - genre: csv | tags
+    - image: string
+    - thumb: string
 4) Add a new panel and select the API Lookup panel from the list of available panels.
 5) Select a collection you would like to save to.
 6) Select the name column from the Response configuration field.
