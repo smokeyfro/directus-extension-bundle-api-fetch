@@ -1,21 +1,29 @@
-# Directus API Fetch
+# Directus API Fetch Bundle
 
-Connect to the 3rd-party api's (via the bundled custom endpoint '/api-lookup?q=[query]'), then add selected items to your configured collection.
+Connect to the 3rd-party api's, then add selected items to your configured collection.
 
 ## Details
 
 - Speed up the process of adding items from external sources.
 - No, I intentionally only used what is natively available.
 - One endpoint and one panel.
-- I would extend it support more data sources (contacts from Clearbit, books from OpenLibrary, plants from Trefle, etc). I would also add more views, filters and the ability to automatically create the collection.
+- Things I'd improve if I had more time:
+    - I would extend it support more data sources (contacts, books, plants, cars, music, etc). 
+    - Add more views, filters and responsive.
+    - Automatically create the collection with the necessary fields.
+    - Refine the code, debounce the input, more checks, etc.
+    - Refine the permissions implementation.
+    - Make it work with any api.
 
 ## Set Up Instructions
 
 The endpoint uses the TVMaze api, which doesn't require any token to api key.
 
 0) Add the extension to your Directus extensions directory.
-1) Restart Directus.
-2) Create a new collection to store your saved videos. To match the api response the collection should have the following fields:
+1) Whitelist the TVMaze domain to allow the show cover image in the selected item preview:
+```CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC: "'self' data: blob: https://static.tvmaze.com"```
+2) Restart Directus.
+3) Create a new collection to store your saved videos. To match the api response the collection should have the following fields:
     - name: string
     - date_created: datetime | timestamp
     - slug: string | slugify
@@ -23,10 +31,10 @@ The endpoint uses the TVMaze api, which doesn't require any token to api key.
     - country: string
     - runtime: integer
     - genre: csv | tags
-3) Add a new panel and select the API Lookup panel from the list of available panels.
-4) Select a collection you would like to save to.
-5) Select the name column from the Response configuration field.
-6) Once the panel is added to your dashboard, simply search for items in the TVMaze database, select an item from the results then click save to Directus.
+4) Add a new panel and select the API Lookup panel from the list of available panels.
+5) Select a collection you would like to save to.
+6) Select the name column from the Response configuration field.
+7) Once the panel is added to your dashboard, simply search for items in the TVMaze database, select an item from the results then click save to Directus.
 
 ## Screenshots
 
