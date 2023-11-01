@@ -2,6 +2,10 @@
 
 Connect to the 3rd-party api's, then add selected items to your configured collection.
 
+I had originally planned on using Clearbit for the demo (look up a person using their email, then create a new contact using the api response), but I decided to go with TVMaze because it doesn't require having an api key. Feel free to fork the code and adapt it to your needs.
+
+Being that this is my first Directus extension, I'd love to get feedback on whether there is anything that could be improved, doesn't work or is just plain wrong.
+
 ## Details
 
 - Speed up the process of adding items from external sources.
@@ -9,6 +13,9 @@ Connect to the 3rd-party api's, then add selected items to your configured colle
 - One endpoint and one panel.
 - Things I'd improve if I had more time:
     - I would extend it support more data sources (contacts, books, plants, cars, music, etc). 
+    - Support more data sources (contacts, books, plants, cars, music, etc).
+    - Multi-select on the results enabling you to to add multiple items at once.
+    - Implement a more robust autocomplete.
     - Add more views, filters and responsive.
     - Automatically create the collection with the necessary fields.
     - Refine the code, debounce the input, more checks, etc.
@@ -19,7 +26,7 @@ Connect to the 3rd-party api's, then add selected items to your configured colle
 
 The endpoint uses the TVMaze api, which doesn't require any token to api key.
 
-0) Add the extension to your Directus extensions directory.
+0) Copy the contents of *dist* to /[your-directus-root]/extensions/directus-extension-bundle-api-fetch/
 1) Whitelist the TVMaze domain to allow the show cover image in the selected item preview:
 ```CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC: "'self' data: blob: https://static.tvmaze.com"```
 2) Restart Directus.
